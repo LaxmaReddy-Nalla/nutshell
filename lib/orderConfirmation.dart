@@ -46,12 +46,12 @@ class OrderConfirmation extends StatelessWidget {
                       Text(
                         'Order ID:',
                         style: TextStyle(
-                            fontSize: 35.0, fontWeight: FontWeight.w600),
+                            fontSize: 25.0, fontWeight: FontWeight.w600),
                       ),
                       Text(
                         '45...',
                         style: TextStyle(
-                            fontSize: 35.0, fontWeight: FontWeight.w600),
+                            fontSize: 25.0, fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -67,12 +67,12 @@ class OrderConfirmation extends StatelessWidget {
                       Text(
                         'Subscription type:',
                         style: TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.w600),
+                            fontSize: 25.0, fontWeight: FontWeight.w600),
                       ),
                       Text(
                           payfree==1?"Free":payone==1?"Basic":paytwo==1?"Standard":paythree==1?"Premium":"Error",
                         style: TextStyle(
-                            fontSize: 35.0, fontWeight: FontWeight.w600),
+                            fontSize: 25.0, fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -88,12 +88,12 @@ class OrderConfirmation extends StatelessWidget {
                       Text(
                         'Valid till:',
                         style: TextStyle(
-                            fontSize: 35.0, fontWeight: FontWeight.w600),
+                            fontSize: 25.0, fontWeight: FontWeight.w600),
                       ),
                       Text(
                         payfree==1?"7 Days":payone==1?"30 Days":paytwo==1?"6 Months":paythree==1?"! year":"Error",
                         style: TextStyle(
-                            fontSize: 35.0, fontWeight: FontWeight.w600),
+                            fontSize: 25.0, fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -116,12 +116,12 @@ class OrderConfirmation extends StatelessWidget {
                       Text(
                         'Subtotal:',
                         style: TextStyle(
-                            fontSize: 35.0, fontWeight: FontWeight.w600),
+                            fontSize: 25.0, fontWeight: FontWeight.w600),
                       ),
                       Text(
                        payfree==1?" ₹ 0":payone==1?"  ₹ 199":paytwo==1?" ₹ 699":paythree==1?" ₹ 1000":"Error",
                         style: TextStyle(
-                            fontSize: 35.0, fontWeight: FontWeight.w600),
+                            fontSize: 25.0, fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -194,8 +194,9 @@ showAlertDialog(BuildContext context) {
       //  signOutGoogle();
       //  OurDatabase().freesubscription(user.uid);
       // OurDatabase().createUser(_currentUser);
-      Navigator.pushNamed(context,"/paperback" );
       CallForFreeUpdation();
+      Navigator.pushNamed(context,"/paperback" );
+      
       // Navigator.pop(context);
       // Navigator.of(context).pushNamedAndRemoveUntil('/paperback', (_) => false);
       

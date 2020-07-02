@@ -70,6 +70,8 @@ class MyApp extends StatelessWidget {
       home:
           //  IntroScreen()
           Splash(),
+      // Otp(),
+
       //  OrderConfirmation(),
       // AboutUs()
       // Details()

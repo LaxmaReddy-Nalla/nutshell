@@ -43,6 +43,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
     _scaffoldKey.currentState.showSnackBar(SnackBar);
   }
 
+  bool btn_enable = false;
   String errorMessage = '';
   String status, actualCode;
 
@@ -53,14 +54,15 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
 
   void initState() {
     // TODO: implement initState
-    onTapRecognizer = TapGestureRecognizer()
-      ..onTap = () {
-        Navigator.pop(context);
-      };
+    // onTapRecognizer = TapGestureRecognizer()
+    //   ..onTap = () {
+    //     Navigator.pop(context);
+    //   };
     errorController = StreamController<ErrorAnimationType>();
     textEditingController = TextEditingController();
 
     super.initState();
+    // verifyPhone();
   }
 
   @override
@@ -197,19 +199,16 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-      
-         leading: new IconButton(
+        leading: new IconButton(
           icon: Icon(
-                        Icons.arrow_back,
-                        size: 30.0,
-                        color: Colors.black,
-                      ),
-                      tooltip: 'back',
-                      onPressed: () {
-                         Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Phone()));
-              
-                    
+            Icons.arrow_back,
+            size: 30.0,
+            color: Colors.black,
+          ),
+          tooltip: 'back',
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Phone()));
           },
         ),
       ),
@@ -220,152 +219,238 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Phone()));
         },
-        child: SingleChildScrollView(
-            child: Center(
-          child: Container(
-            color: Colors.white,
-            margin: EdgeInsets.only(top: SizeConfig.wt * 0.13),
-            width: SizeConfig.wt * 0.8,
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  // Center(
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.only(top:15.0),
-                  //     child: Text(
-                  //       "OTP Verification",
-                  //       style:
-                  //           TextStyle(color: Theme.of(context).primaryColor, fontSize: 33,fontWeight: FontWeight.w600),
-                  //     ),
-                  //   ),
-                  // ),
-                  // SizedBox(height:SizeConfig.ht*0.1),
-                  Padding(
-                    padding: EdgeInsets.only(top: 50.0),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "One time password(OTP) has been ",
-                            style: TextStyle(color: Colors.grey, fontSize: 20),
-                          ),
-                          Text(
-                            "sent to your mobile ",
-                            style: TextStyle(color: Colors.grey, fontSize: 20),
-                          ),
-                        ]),
-                  ),
-                   Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: Center(
-                       child:Text(
-                                      "+91-${widget.PhoneNo}",//1 is for phone number
 
-                                      style: TextStyle(
-                                          color: Theme.of(context).primaryColor,
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                     ),
-                   ),
-                  Center(
-                    child: Text(
-                      "Please enter the same here",
-                      style: TextStyle(color: Colors.grey, fontSize: 20),
-                    ),
-                  ),
-
-                  GestureDetector(
-                    child: Container(
-                      width: SizeConfig.wt * 0.35,
-                      child: PinCodeTextField(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        length: 6,
-                        obsecureText: false,
-                        animationType: AnimationType.fade,
-                        pinTheme: PinTheme(
-                            shape: PinCodeFieldShape.underline,
-                            // borderRadius: BorderRadius.circular(5),
-                            fieldHeight: 50,
-                            fieldWidth: 35,
-                            activeFillColor: Colors.white,
-                            inactiveFillColor: Colors.white,
-                            selectedFillColor: Colors.white,
-                            inactiveColor: Colors.grey),
-                        animationDuration: Duration(milliseconds: 300),
-                        // backgroundColor: Colors.blue.shade50,
-                        enableActiveFill: true,
-                        errorAnimationController: errorController,
-                        controller: textEditingController,
-                        onCompleted: (v) {
-                          print("Completed");
-                        },
-                        onChanged: (value) {
-                          print(value);
-
-                          setState(() {
-                            currentText = value;
-                          });
-                        },
-                        beforeTextPaste: (text) {
-                          print("Allowing to paste $text");
-                          //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                          //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                          return true;
-                        },
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: SizeConfig.ht * 0.045),
-                    child: RaisedButton(
-                        padding: EdgeInsets.only(
-                            top: SizeConfig.ht * 0.01,
-                            bottom: SizeConfig.ht * 0.01,
-                            left: SizeConfig.wt * 0.08,
-                            right: SizeConfig.wt * 0.08),
-                        color: Theme.of(context).primaryColor,
-                        onPressed: () {
-                          print("curent text $currentText");
-                          SmsValidator(currentText);
-                        },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(50.0),
-                        ),
-                        child: _isLoading
-                            ? Center(
-                                child: CircularProgressIndicator(
-                                backgroundColor: Colors.blue,
-                              ))
-                            : Text("VERIFY OTP",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 22))),
-                  ),
-
-                  // Center(
-                  //     child: Padding(
-                  //   padding: EdgeInsets.only(
-                  //       top: SizeConfig.ht * 0.018, bottom: SizeConfig.ht * 0.018),
-                  //   child: FlatButton(
-                  //     onPressed: () {
-                  //       print("Resend OTP");
-                  //     },
-                  //     child: Text(
-                  //       "Resend OTP",
-                  //       style: TextStyle(
-                  //           color: Theme.of(context).primaryColor,
-                  //           fontSize: 22),
-                  //     ),
-                  //   ),
-                  // )),
-                ],
+        child: Container(
+          padding:
+              EdgeInsets.only(left: 20.0, top: 20.0, right: 10.0, bottom: 15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
               ),
-            ),
+              Text(
+                'Please wait while we \nauto verify the otp.',
+                style: TextStyle(
+                    fontSize: 50.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.redAccent[700]),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+              ),
+              PinCodeTextField(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                length: 6,
+                obsecureText: false,
+                animationType: AnimationType.fade,
+                pinTheme: PinTheme(
+                  borderRadius: BorderRadius.circular(10.0),
+                  // borderWidth: 5rr.0,
+                  inactiveColor: Colors.black,
+                  shape: PinCodeFieldShape.box,
+                  fieldHeight: 60,
+                  fieldWidth: 45.0,
+                  activeColor: Colors.white,
+                  inactiveFillColor: Colors.white,
+                  selectedFillColor: Colors.white,
+                  activeFillColor: Colors.white,
+                  // inactiveColor: Colors.grey
+                ),
+                animationDuration: Duration(milliseconds: 300),
+
+                // backgroundColor: Colors.blue.shade50,
+                enableActiveFill: true,
+                errorAnimationController: errorController,
+                controller: textEditingController,
+                onCompleted: (v) {
+                  print("Completed");
+                },
+                onChanged: (value) {
+                  print(value);
+
+                  setState(() {
+                    currentText = value;
+                  });
+                },
+                beforeTextPaste: (text) {
+                  print("Allowing to paste $text");
+                  //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                  //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                  return true;
+                },
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.07,
+                width: MediaQuery.of(context).size.width * 0.95,
+                child: RaisedButton(
+                  color: Colors.redAccent[700],
+                  onPressed: () {},
+                  child: Text(
+                    'Continue',
+                    style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0)),
+                ),
+              ),
+            ],
           ),
-        )),
+        ),
+
+        //     Center(
+        //   child: Container(
+        //     color: Colors.white,
+        //     margin: EdgeInsets.only(top: SizeConfig.wt * 0.13),
+        //     width: SizeConfig.wt * 0.8,
+        //     child: Center(
+        //       child: Column(
+        //         crossAxisAlignment: CrossAxisAlignment.center,
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: <Widget>[
+        //           // Center(
+        //           //   child: Padding(
+        //           //     padding: const EdgeInsets.only(top:15.0),
+        //           //     child: Text(
+        //           //       "OTP Verification",
+        //           //       style:
+        //           //           TextStyle(color: Theme.of(context).primaryColor, fontSize: 33,fontWeight: FontWeight.w600),
+        //           //     ),
+        //           //   ),
+        //           // ),
+        //           // SizedBox(height:SizeConfig.ht*0.1),
+        //           Padding(
+        //             padding: EdgeInsets.only(top: 50.0),
+        //             child: Column(
+        //                 crossAxisAlignment: CrossAxisAlignment.center,
+        //                 mainAxisAlignment: MainAxisAlignment.center,
+        //                 children: <Widget>[
+        //                   Text(
+        //                     "One time password(OTP) has been ",
+        //                     style: TextStyle(color: Colors.grey, fontSize: 20),
+        //                   ),
+        //                   Text(
+        //                     "sent to your mobile ",
+        //                     style: TextStyle(color: Colors.grey, fontSize: 20),
+        //                   ),
+        //                 ]),
+        //           ),
+        //           Padding(
+        //             padding: const EdgeInsets.all(8.0),
+        //             child: Center(
+        //               child: Text(
+        //                 "+91-${widget.PhoneNo}", //1 is for phone number
+
+        //                 style: TextStyle(
+        //                     color: Theme.of(context).primaryColor,
+        //                     fontSize: 25,
+        //                     fontWeight: FontWeight.w400),
+        //               ),
+        //             ),
+        //           ),
+        //           Center(
+        //             child: Text(
+        //               "Please enter the same here",
+        //               style: TextStyle(color: Colors.grey, fontSize: 20),
+        //             ),
+        //           ),
+
+        //           GestureDetector(
+        //             child: Container(
+        //               width: SizeConfig.wt * 0.35,
+        //               child:
+        // PinCodeTextField(
+        //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //                 length: 6,
+        //                 obsecureText: false,
+        //                 animationType: AnimationType.fade,
+        //                 pinTheme: PinTheme(
+        //                     shape: PinCodeFieldShape.underline,
+        //                     // borderRadius: BorderRadius.circular(5),
+        //                     fieldHeight: 50,
+        //                     fieldWidth: 35,
+        //                     activeFillColor: Colors.white,
+        //                     inactiveFillColor: Colors.white,
+        //                     selectedFillColor: Colors.white,
+        //                     inactiveColor: Colors.grey),
+        //                 animationDuration: Duration(milliseconds: 300),
+        //                 // backgroundColor: Colors.blue.shade50,
+        //                 enableActiveFill: true,
+        //                 errorAnimationController: errorController,
+        //                 controller: textEditingController,
+        //                 onCompleted: (v) {
+        //                   print("Completed");
+        //                 },
+        //                 onChanged: (value) {
+        //                   print(value);
+
+        //                   setState(() {
+        //                     currentText = value;
+        //                   });
+        //                 },
+        //                 beforeTextPaste: (text) {
+        //                   print("Allowing to paste $text");
+        //                   //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+        //                   //but you can show anything you want here, like your pop up saying wrong paste format or etc
+        //                   return true;
+        //                 },
+        //               ),
+        //             ),
+        //           ),
+        //           Padding(
+        //             padding: EdgeInsets.only(top: SizeConfig.ht * 0.045),
+        //             child: RaisedButton(
+        //                 padding: EdgeInsets.only(
+        //                     top: SizeConfig.ht * 0.01,
+        //                     bottom: SizeConfig.ht * 0.01,
+        //                     left: SizeConfig.wt * 0.08,
+        //                     right: SizeConfig.wt * 0.08),
+        //                 color: Theme.of(context).primaryColor,
+        //                 onPressed: () {
+        //                   print("curent text $currentText");
+        //                   SmsValidator(currentText);
+        //                 },
+        //                 shape: RoundedRectangleBorder(
+        //                   borderRadius: new BorderRadius.circular(50.0),
+        //                 ),
+        //                 child: _isLoading
+        //                     ? Center(
+        //                         child: CircularProgressIndicator(
+        //                         backgroundColor: Colors.blue,
+        //                       ))
+        //                     : Text("VERIFY OTP",
+        //                         style: TextStyle(
+        //                             color: Colors.white, fontSize: 22))),
+        //           ),
+
+        //           // Center(
+        //           //     child: Padding(
+        //           //   padding: EdgeInsets.only(
+        //           //       top: SizeConfig.ht * 0.018, bottom: SizeConfig.ht * 0.018),
+        //           //   child: FlatButton(
+        //           //     onPressed: () {
+        //           //       print("Resend OTP");
+        //           //     },
+        //           //     child: Text(
+        //           //       "Resend OTP",
+        //           //       style: TextStyle(
+        //           //           color: Theme.of(context).primaryColor,
+        //           //           fontSize: 22),
+        //           //     ),
+        //           //   ),
+        //           // )),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // )
       ),
     );
   }

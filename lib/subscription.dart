@@ -34,6 +34,9 @@ class Subscription extends StatefulWidget {
   _SubscriptionState createState() => _SubscriptionState();
 }
 
+// enum en { f, b, s, p }
+Map pay = {0: payfree, 1: payone, 2: paytwo, 3: paythree};
+
 class _SubscriptionState extends State<Subscription> {
   var oneval = false;
   var twoval = false;
@@ -42,26 +45,20 @@ class _SubscriptionState extends State<Subscription> {
   var threeval = false;
 
   static const List<String> svgNames = <String>[
-    "assets/images/1Year.svg",
+    "assets/images/7Days.svg",
     "assets/images/2Months.svg",
     "assets/images/6Months.svg",
-    "assets/images/7Days.svg",
+    "assets/images/1Year.svg",
   ];
   @override
   Widget build(BuildContext context) {
     callSet(String sv) {
-      if (isVisible == true && svgIndex != svgNames.indexOf(sv)) {
-        setState(() {
-          isVisible = true;
-          svgIndex = svgNames.indexOf(sv);
-        });
-      } else {
-        setState(() {
-          isVisible = !isVisible;
-
-          svgIndex = svgNames.indexOf(sv);
-        });
-      }
+      setState(() {
+        isVisible == true && svgIndex != svgNames.indexOf(sv)
+            ? isVisible = true
+            : isVisible = !isVisible;
+        svgIndex = svgNames.indexOf(sv);
+      });
     }
 
     return Scaffold(
@@ -75,12 +72,16 @@ class _SubscriptionState extends State<Subscription> {
               style: TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold),
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.75,
+              height: MediaQuery.of(context).size.height * 0.65,
               width: MediaQuery.of(context).size.width * 1.4,
               child: CarouselSlider(
                   options: CarouselOptions(
                     aspectRatio: 8 / 25,
                     autoPlay: false,
+                    enableInfiniteScroll: false,
+
+                    // height: 2000,
+                    // width: MediaQuery.of(context).size.height * 0.90,
                   ),
                   items: svgNames.map((sv) {
                     return Builder(
@@ -104,13 +105,13 @@ class _SubscriptionState extends State<Subscription> {
                                         : false,
                                     child: Positioned(
                                       left: MediaQuery.of(context).size.width *
-                                          0.52,
+                                          0.32,
                                       top: MediaQuery.of(context).size.height *
-                                          0.30,
+                                          0.05,
                                       child: Icon(
                                         Icons.check_circle,
-                                        color: Colors.white,
-                                        size: 45,
+                                        color: Color.fromRGBO(191, 30, 46, 1),
+                                        size: 60,
                                       ),
                                     ))
                               ],
@@ -120,28 +121,60 @@ class _SubscriptionState extends State<Subscription> {
                   }).toList()),
             ),
             Container(
-              padding: EdgeInsets.only(left: 150.0, right: 10.0),
-
+              padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.4,
+                  right: 10.0,
+                  bottom: 10),
+              // child: Visibility(
+              // visible: isVisible,
               child: RaisedButton(
                 padding: EdgeInsets.only(
-                    left: 50.0, right: 50.0, top: 10.0, bottom: 10.0),
+                    left: 22.0, right: 20.0, top: 10.0, bottom: 10.0),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0)),
                 onPressed: isVisible == true
                     ? () {
-                        global.subPlan = en.values[svgIndex].toString();
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => OrderConfirmation()))
-                        Navigator.of(context).pushNamed('/details');
+                        setState(() {
+                          global.subPlan = en.values[svgIndex].toString();
+                          print("index of svg $svgIndex");
+                          switch (svgIndex) {
+                            case 0:
+                              {
+                                payfree = 1;
+                                break;
+                              }
+                            case 1:
+                              {
+                                payone = 1;
+                                break;
+                              }
+
+                            case 2:
+                              {
+                                paytwo = 1;
+                                break;
+                              }
+                            case 3:
+                              {
+                                paythree = 1;
+                                break;
+                              }
+                          }
+                        });
+
+                        print(pay.values.toList()[svgIndex].toString());
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Details()));
                       }
                     : null,
                 disabledColor: Colors.grey,
                 color: Colors.redAccent[700],
-                child: Text(
-                  'Continue',
-                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                child: Center(
+                  child: Text(
+                    'Continue',
+                    style:
+                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               // ),
@@ -220,7 +253,7 @@ void openCheckout(BuildContext context) async {
     'name': 'Nutshell',
     //'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
     'description': 'One month Nutshell Subscription',
-    'prefill': {'contact': '+91' + phone, 'email': email}
+    'prefill': {'contact': '+91' + global.phone, 'email': global.email}
   };
 
   try {
@@ -285,7 +318,7 @@ void openCheckoutthree(BuildContext context) async {
     'name': 'Nutshell',
     //'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
     'description': 'Nutshell Subscription',
-    'prefill': {'contact': '+91' + phone, 'email': email}
+    'prefill': {'contact': '+91' + global.phone, 'email': global.email}
   };
   try {
     print("Trying to go to razorpay");
@@ -349,7 +382,7 @@ void openCheckoutyear(BuildContext context) async {
     'name': 'Nutshell',
     //'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
     'description': 'Nutshell Subscription',
-    'prefill': {'contact': '+91' + phone, 'email': email}
+    'prefill': {'contact': '+91' + global.phone, 'email': global.email}
   };
   try {
     print("Trying to go to razorpay");
@@ -406,7 +439,7 @@ void openCheckoutweek(BuildContext context) async {
   }
 
   print("Just came to checkout functionfds");
-  print(phone);
+  print(global.phone);
   var oneweek = {
     'key': 'rzp_live_A94dLEeQb2Cj5s',
     'currency': "INR",
@@ -414,7 +447,7 @@ void openCheckoutweek(BuildContext context) async {
     'name': 'Nutshell',
     // 'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
     'description': 'Nutshell Subscription',
-    'prefill': {'contact': '+91' + phone, 'email': email}
+    'prefill': {'contact': '+91' + global.phone, 'email': global.email}
   };
 // print("Just before going to razorpay try");
   try {
@@ -590,10 +623,10 @@ void _handleExternalWallet(ExternalWalletResponse response) {
 //             child: TextFormField(
 //               autovalidate: true,
 //                 keyboardType: TextInputType.number,
-//                 decoration: InputDecoration(hintText: 'Enter Phone Number', prefix: Text("+91")),
-//                 validator: validatePhone,
+//                 decoration: InputDecoration(hintText: 'Enter global.phone Number', prefix: Text("+91")),
+//                 validator: validateglobal.phone,
 //                 onSaved: (String value) {
-//                   _currentUser.phone = value;
+//                   _currentUser.global.phone = value;
 //                 }),
 //           ),
 //           SizedBox(
@@ -712,7 +745,7 @@ void _handleExternalWallet(ExternalWalletResponse response) {
 //     return null;
 //   }
 // }
-// String validatePhone(String value) {
+// String validateglobal.phone(String value) {
 // // Indian Mobile number are of 10 digit only
 //     if (value.length != 10)
 //       return 'Mobile Number must be of 10 digit';
