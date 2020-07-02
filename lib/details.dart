@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:nutshell/orderConfirmation.dart';
 import 'package:nutshell/users.dart';
@@ -18,6 +17,7 @@ import 'account.dart';
 import 'AccountModule.dart/aboutUs.dart';
 import 'orderConfirmation.dart';
 import 'AccountModule.dart/help.dart';
+
 String phone;
 String email;
 
@@ -38,18 +38,17 @@ class Details extends StatelessWidget {
         '/instution': (BuildContext context) => new Instution(),
         '/pincode': (BuildContext context) => new PinCode(),
         '/paperback': (BuildContext context) => Paperbacks(),
-       '/group': (BuildContext context) => GroupScreen(),
-       '/account': (BuildContext context) => Account(),
-       '/about': (BuildContext context) => About(),
+        '/group': (BuildContext context) => GroupScreen(),
+        '/account': (BuildContext context) => Account(),
+        '/about': (BuildContext context) => About(),
         '/help': (BuildContext context) => Help(),
-       '/contact': (BuildContext context) => ContactUs(),
-       '/pricing': (BuildContext context) => Pricing(),
-       '/privacy': (BuildContext context) => Privacy(),
-       '/refund': (BuildContext context) => Refund(),
-       '/termsandconditions': (BuildContext context) => TermsAndConditions(),
-       '/editprofile': (BuildContext context) => EditProfileScreen(),
-       '/aboutUs': (BuildContext context) => AboutUs(),
-
+        '/contact': (BuildContext context) => ContactUs(),
+        '/pricing': (BuildContext context) => Pricing(),
+        '/privacy': (BuildContext context) => Privacy(),
+        '/refund': (BuildContext context) => Refund(),
+        '/termsandconditions': (BuildContext context) => TermsAndConditions(),
+        '/editprofile': (BuildContext context) => EditProfileScreen(),
+        '/aboutUs': (BuildContext context) => AboutUs(),
       },
     );
   }
@@ -66,96 +65,87 @@ class _NameScreenState extends State<NameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-      body:WillPopScope(
-      onWillPop:()
-      {
-        print("going back from name");
-        // callSnackBar("Exit");
-        // Navigator.pushNamed(context, "/landingpage");
-        Details();
-      },
-      child: 
-      ListView(
-        children: <Widget>[
-          Container(
-      padding: EdgeInsets.all(15.0),
-      child:
-       Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          Text(
-            'My \nName is',
-            style: TextStyle(
-                fontSize: 75.0,
-                color: Colors.redAccent[700],
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          TextFormField(
-            autovalidate: true,
-            validator: (String txt) {
-              if (txt.length >= 3) {
-                Future.delayed(Duration.zero).then((_) {
-                  setState(() {
-                    btn_enable = true;
-                    global.name = txt;
-                  });
-                });
-              } else {
-                Future.delayed(Duration.zero).then((_) {
-                  setState(() {
-                    btn_enable = false;
-
-                  });
-                });
-              }
+        body: WillPopScope(
+            onWillPop: () {
+              print("going back from name");
+              // callSnackBar("Exit");
+              // Navigator.pushNamed(context, "/landingpage");
+              Details();
             },
-            decoration: InputDecoration(
-                hintText: 'Enter Your Name',
-                hintStyle:
-                    TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600)),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.95,
-            height: MediaQuery.of(context).size.height * 0.07,
-            child: RaisedButton(
-              color: Colors.redAccent[700],
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0)),
-              child: Text(
-                'Continue',
-                style: TextStyle(
-                    fontSize: 40.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ),
-              // padding: EdgeInsets.fromLTRB(180.0, 15.0, 190.0, 15.0),
-              onPressed: btn_enable == true
-                  ? () {
-                      Navigator.of(context).pushNamed('/email');
-
-                    }
-                  : null,
-            ),
-          ),
-        ],
-      ),)
-        ],
-      )
-      
-    
-    )
-    );
-
+            child: ListView(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(15.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
+                      ),
+                      Text(
+                        'My \nName is',
+                        style: TextStyle(
+                            fontSize: 75.0,
+                            color: Colors.redAccent[700],
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
+                      ),
+                      TextFormField(
+                        autovalidate: true,
+                        validator: (String txt) {
+                          if (txt.length >= 3) {
+                            Future.delayed(Duration.zero).then((_) {
+                              setState(() {
+                                btn_enable = true;
+                                global.name = txt;
+                              });
+                            });
+                          } else {
+                            Future.delayed(Duration.zero).then((_) {
+                              setState(() {
+                                btn_enable = false;
+                              });
+                            });
+                          }
+                        },
+                        decoration: InputDecoration(
+                            hintText: 'Enter Your Name',
+                            hintStyle: TextStyle(
+                                fontSize: 30.0, fontWeight: FontWeight.w600)),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.95,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        child: RaisedButton(
+                          color: Colors.redAccent[700],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0)),
+                          child: Text(
+                            'Continue',
+                            style: TextStyle(
+                                fontSize: 40.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          // padding: EdgeInsets.fromLTRB(180.0, 15.0, 190.0, 15.0),
+                          onPressed: btn_enable == true
+                              ? () {
+                                  Navigator.of(context).pushNamed('/email');
+                                }
+                              : null,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            )));
   }
 }
 
@@ -170,92 +160,85 @@ class _EmailState extends State<Email> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-      body:WillPopScope(
-      onWillPop:()
-      {
-        print("going back from name");
-        // callSnackBar("Exit");
-        // Navigator.pushNamed(context, "/landingpage");
-        Details();
-      },
-      child: 
-      ListView(
-        children: <Widget>[
-        Container(
-      padding: EdgeInsets.all(15.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          Text(
-            'My \nEmail/Phone \nis',
-            style: TextStyle(
-                fontSize: 75.0,
-                color: Colors.redAccent[700],
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          TextFormField(
-            // controller: validateEmail(),
-            autovalidate: true,
-            validator: (String txt) {
-              if (txt.length >= 6) {
-                Future.delayed(Duration.zero).then((_) {
-                  setState(() {
-                    btn_enable = true;
-                    global.emailOrNumVal=txt;
-                  });
-                });
-              } else {
-                Future.delayed(Duration.zero).then((_) {
-                  setState(() {
-                    btn_enable = false;
-                  });
-                });
-              }
+        body: WillPopScope(
+            onWillPop: () {
+              print("going back from name");
+              // callSnackBar("Exit");
+              // Navigator.pushNamed(context, "/landingpage");
+              Details();
             },
-            decoration: InputDecoration(
-                hintText: 'Enter Your Email/Phone',
-                hintStyle:
-                    TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600)),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.95,
-            height: MediaQuery.of(context).size.height * 0.07,
-            child: RaisedButton(
-                color: Colors.redAccent[700],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0)),
-                child: Text(
-                  'Continue',
-                  style: TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+            child: ListView(children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    Text(
+                      'My \nEmail/Phone \nis',
+                      style: TextStyle(
+                          fontSize: 75.0,
+                          color: Colors.redAccent[700],
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    TextFormField(
+                      // controller: validateEmail(),
+                      autovalidate: true,
+                      validator: (String txt) {
+                        if (txt.length >= 6) {
+                          Future.delayed(Duration.zero).then((_) {
+                            setState(() {
+                              btn_enable = true;
+                              global.emailOrNumVal = txt;
+                            });
+                          });
+                        } else {
+                          Future.delayed(Duration.zero).then((_) {
+                            setState(() {
+                              btn_enable = false;
+                            });
+                          });
+                        }
+                      },
+                      decoration: InputDecoration(
+                          hintText: 'Enter Your Email/Phone',
+                          hintStyle: TextStyle(
+                              fontSize: 30.0, fontWeight: FontWeight.w600)),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      child: RaisedButton(
+                          color: Colors.redAccent[700],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0)),
+                          child: Text(
+                            'Continue',
+                            style: TextStyle(
+                                fontSize: 40.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          // padding: EdgeInsets.fromLTRB(180.0, 15.0, 190.0, 15.0),
+                          onPressed: btn_enable == true
+                              ? () {
+                                  Navigator.of(context).pushNamed('/birth');
+                                }
+                              : null),
+                    ),
+                  ],
                 ),
-                // padding: EdgeInsets.fromLTRB(180.0, 15.0, 190.0, 15.0),
-                onPressed: btn_enable == true
-                    ? () {
-                        Navigator.of(context).pushNamed('/birth');
-                      }
-                    : null),
-          ),
-        ],
-      ),
-        )
-          ]
-  
-    )
-    )
-    );
+              )
+            ])));
   }
 }
 
@@ -268,144 +251,146 @@ class _BirthDayState extends State<BirthDay> {
   bool btn_enable = false;
   String birthDateInString;
   DateTime birthDate;
-  bool isDateSelected= false;
+  bool isDateSelected = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white,
-      body:WillPopScope(
-      onWillPop:()
-      {
-        print("going back from name");
-        // callSnackBar("Exit");
-        // Navigator.pushNamed(context, "/landingpage");
-        Details();
-      },
-      child: 
-      ListView(
-        children: <Widget>[
-          Container(
-      padding: EdgeInsets.all(15.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          Text(
-            'My \nbirthday is',
-            style: TextStyle(
-                fontSize: 75.0,
-                color: Colors.redAccent[700],
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          SizedBox(
-          width: MediaQuery.of(context).size.width * 0.95,
-          height: MediaQuery.of(context).size.height * 0.07,
-          child:InkWell(
-            child: Row(children: <Widget>[
-            Text(birthDateInString==null?'DD/MM/YYYY     ':"   "+birthDateInString+"  ",
-            style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.w600),
-            ),
-             Icon(Icons.calendar_today,
-             color: Colors.red,
-             size: 35.0,
-             )
-            ],),
-            onTap: ()async{
-                final datePick= await showDatePicker(
-                      context: context,
-                      initialDate: new DateTime(1999,06,25),
-                      firstDate: new DateTime(1970),
-                      lastDate: new DateTime(2013)
-                  );
-                  if(datePick!=null && datePick!=birthDate){
-                    setState(() {
-                            birthDate=datePick;
-                        isDateSelected=true;
-                        birthDateInString = "${birthDate.month}/${birthDate.day}/${birthDate.year}"; // 08/14/2019
-                        global.dob=birthDateInString;
-                      });
-                    }
-                    
-                  setState(() {
-                    btn_enable = true;
-                  });
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: WillPopScope(
+            onWillPop: () {
+              print("going back from name");
+              // callSnackBar("Exit");
+              // Navigator.pushNamed(context, "/landingpage");
+              Details();
             },
-          ),
-         ),
-          // SizedBox(
-          //   height: MediaQuery.of(context).size.height * 0.05,
-          // ),
-          // TextFormField(
-          //   autovalidate: true,
-          //   decoration: InputDecoration(
-          //       hintText: birthDateInString==null?'DD/MM/YYYY':birthDateInString,
-          //       hintStyle:
-          //           TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600),
-          //       suffixIcon: IconButton(
-          //         color: Colors.red,
-          //         icon: Icon(Icons.calendar_today),
-          //         onPressed: () async{
-          //           print("clicked");
-          //           final datePick= await showDatePicker(
-          //             context: context,
-          //             initialDate: new DateTime(1999,06,25),
-          //             firstDate: new DateTime(1970),
-          //             lastDate: new DateTime(2013)
-          //         );
-          //         if(datePick!=null && datePick!=birthDate){
-          //           setState(() {
-          //                   birthDate=datePick;
-          //               isDateSelected=true;
+            child: ListView(children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    Text(
+                      'My \nbirthday is',
+                      style: TextStyle(
+                          fontSize: 75.0,
+                          color: Colors.redAccent[700],
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      child: InkWell(
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              birthDateInString == null
+                                  ? 'DD/MM/YYYY     '
+                                  : "   " + birthDateInString + "  ",
+                              style: TextStyle(
+                                  fontSize: 35.0, fontWeight: FontWeight.w600),
+                            ),
+                            Icon(
+                              Icons.calendar_today,
+                              color: Colors.red,
+                              size: 35.0,
+                            )
+                          ],
+                        ),
+                        onTap: () async {
+                          final datePick = await showDatePicker(
+                              context: context,
+                              initialDate: new DateTime(1999, 06, 25),
+                              firstDate: new DateTime(1970),
+                              lastDate: new DateTime(2013));
+                          if (datePick != null && datePick != birthDate) {
+                            setState(() {
+                              birthDate = datePick;
+                              isDateSelected = true;
+                              birthDateInString =
+                                  "${birthDate.month}/${birthDate.day}/${birthDate.year}"; // 08/14/2019
+                              global.dob = birthDateInString;
+                            });
+                          }
 
-          //               // put it here
-          //               birthDateInString = "${birthDate.month}/${birthDate.day}/${birthDate.year}"; // 08/14/2019
-          //               global.dob=birthDateInString;
-          //             });
-          //           }
-                    
-          //         setState(() {
-          //           btn_enable = true;
-          //         });
-                        
-          //         },
-          //       )),
-          // ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.95,
-            height: MediaQuery.of(context).size.height * 0.07,
-            child: RaisedButton(
-                color: Colors.redAccent[700],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0)),
-                child: Text(
-                  'Continue',
-                  style: TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                          setState(() {
+                            btn_enable = true;
+                          });
+                        },
+                      ),
+                    ),
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.height * 0.05,
+                    // ),
+                    // TextFormField(
+                    //   autovalidate: true,
+                    //   decoration: InputDecoration(
+                    //       hintText: birthDateInString==null?'DD/MM/YYYY':birthDateInString,
+                    //       hintStyle:
+                    //           TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600),
+                    //       suffixIcon: IconButton(
+                    //         color: Colors.red,
+                    //         icon: Icon(Icons.calendar_today),
+                    //         onPressed: () async{
+                    //           print("clicked");
+                    //           final datePick= await showDatePicker(
+                    //             context: context,
+                    //             initialDate: new DateTime(1999,06,25),
+                    //             firstDate: new DateTime(1970),
+                    //             lastDate: new DateTime(2013)
+                    //         );
+                    //         if(datePick!=null && datePick!=birthDate){
+                    //           setState(() {
+                    //                   birthDate=datePick;
+                    //               isDateSelected=true;
+
+                    //               // put it here
+                    //               birthDateInString = "${birthDate.month}/${birthDate.day}/${birthDate.year}"; // 08/14/2019
+                    //               global.dob=birthDateInString;
+                    //             });
+                    //           }
+
+                    //         setState(() {
+                    //           btn_enable = true;
+                    //         });
+
+                    //         },
+                    //       )),
+                    // ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      child: RaisedButton(
+                          color: Colors.redAccent[700],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0)),
+                          child: Text(
+                            'Continue',
+                            style: TextStyle(
+                                fontSize: 40.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          // padding: EdgeInsets.fromLTRB(180.0, 15.0, 190.0, 15.0),
+                          onPressed: btn_enable == true
+                              ? () {
+                                  Navigator.of(context).pushNamed('/instution');
+                                }
+                              : null),
+                    ),
+                  ],
                 ),
-                // padding: EdgeInsets.fromLTRB(180.0, 15.0, 190.0, 15.0),
-                onPressed: btn_enable == true
-                    ? () {
-                        Navigator.of(context).pushNamed('/instution');
-                      }
-                    : null),
-          ),
-        ],
-      ),
-          )
-        ]
-      )
-    )
-    );
+              )
+            ])));
   }
 }
 
@@ -418,92 +403,87 @@ class _InstutionState extends State<Instution> {
   bool btn_enable = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white,
-      body:WillPopScope(
-      onWillPop:()
-      {
-        print("going back from name");
-        // callSnackBar("Exit");
-        // Navigator.pushNamed(context, "/landingpage");
-        Details();
-      },
-      child: 
-      ListView(
-        children: <Widget>[
-          Container(
-      padding: EdgeInsets.all(15.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          Text(
-            'My \nInstitution is',
-            style: TextStyle(
-                fontSize: 75.0,
-                color: Colors.redAccent[700],
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          TextFormField(
-            autovalidate: true,
-            validator: (String txt) {
-              if (txt.length >= 3) {
-                Future.delayed(Duration.zero).then((_) {
-                  setState(() {
-                    btn_enable = true;
-                    global.ins=txt;
-                  });
-                });
-              } else {
-                Future.delayed(Duration.zero).then((_) {
-                  setState(() {
-                    btn_enable = false;
-                  });
-                });
-              }
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: WillPopScope(
+            onWillPop: () {
+              print("going back from name");
+              // callSnackBar("Exit");
+              // Navigator.pushNamed(context, "/landingpage");
+              Details();
             },
-            // controller: cont,
-            decoration: InputDecoration(
-                hintText: 'Enter Your Institution',
-                hintStyle:
-                    TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600)),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.95,
-            height: MediaQuery.of(context).size.height * 0.07,
-            child: RaisedButton(
-                color: Colors.redAccent[700],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0)),
-                child: Text(
-                  'Continue',
-                  style: TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+            child: ListView(children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    Text(
+                      'My \nInstitution is',
+                      style: TextStyle(
+                          fontSize: 75.0,
+                          color: Colors.redAccent[700],
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    TextFormField(
+                      autovalidate: true,
+                      validator: (String txt) {
+                        if (txt.length >= 3) {
+                          Future.delayed(Duration.zero).then((_) {
+                            setState(() {
+                              btn_enable = true;
+                              global.ins = txt;
+                            });
+                          });
+                        } else {
+                          Future.delayed(Duration.zero).then((_) {
+                            setState(() {
+                              btn_enable = false;
+                            });
+                          });
+                        }
+                      },
+                      // controller: cont,
+                      decoration: InputDecoration(
+                          hintText: 'Enter Your Institution',
+                          hintStyle: TextStyle(
+                              fontSize: 30.0, fontWeight: FontWeight.w600)),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      child: RaisedButton(
+                          color: Colors.redAccent[700],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0)),
+                          child: Text(
+                            'Continue',
+                            style: TextStyle(
+                                fontSize: 40.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          // padding: EdgeInsets.fromLTRB(180.0, 15.0, 190.0, 15.0),
+                          onPressed: btn_enable == true
+                              ? () {
+                                  Navigator.of(context).pushNamed('/pincode');
+                                }
+                              : null),
+                    ),
+                  ],
                 ),
-                // padding: EdgeInsets.fromLTRB(180.0, 15.0, 190.0, 15.0),
-                onPressed: btn_enable == true
-                    ? () {
-                        Navigator.of(context).pushNamed('/pincode');
-                      }
-                    : null),
-          ),
-        ],
-      ),
-          )
-        ]
-      )
-    )
-    );
+              )
+            ])));
   }
 }
 
@@ -514,180 +494,173 @@ class PinCode extends StatefulWidget {
 
 class _PinCodeState extends State<PinCode> {
   String pinCode;
-  bool _isLoading=false;
-  bool btn_enable=false;
-  
+  bool _isLoading = false;
+  bool btn_enable = false;
+
   Geolocator geolocator = Geolocator();
 
-   Future<Position> _getLocation() async {
+  Future<Position> _getLocation() async {
     var currentLocation;
     try {
-        currentLocation= await geolocator.getCurrentPosition(
+      currentLocation = await geolocator.getCurrentPosition(
           // desiredAccuracy: LocationAccuracy.best
-        );
-       } catch (e) {
+          );
+    } catch (e) {
       currentLocation = null;
     }
     return currentLocation;
   }
 
-  
   @override
   Widget build(BuildContext context) {
+    Position userLocation;
 
-  Position userLocation;
+    void callMe(Position userLocation) async {
+      print("called for pLacemark");
+      List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(
+          userLocation.latitude, userLocation.longitude);
 
-  void callMe(Position userLocation)async{
-    print("called for pLacemark");
-    List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(userLocation.latitude,userLocation.longitude);
-    
-    print(placemark[0].postalCode);
-    setState(() {
-      
-    pinCode= placemark[0].postalCode;
-    btn_enable=true;
-    _isLoading=false;
-    });
-    // print(placemark[0].name+placemark[0].administrativeArea+placemark[0].name+placemark[0].administrativeArea);
-  }
-  
-    return Scaffold(backgroundColor: Colors.white,
-      body:WillPopScope(
-      onWillPop:()
-      {
-        print("going back from name");
-        // callSnackBar("Exit");
-        // Navigator.pushNamed(context, "/landingpage");
-        Details();
-      },
-      child: 
-      ListView(
-        children: <Widget>[
-          Container(
-      padding: EdgeInsets.all(15.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          Text(
-            'My \nPincode is',
-            style: TextStyle(
-                fontSize: 75.0,
-                color: Colors.redAccent[700],
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          SizedBox(
-           width: 320,
-           child:Row(
-             children: <Widget>[
-              SizedBox(
-          width: MediaQuery.of(context).size.width/3,
-          child: TextFormField(
-              // autovalidate: true,
-              validator: (String txt) {
-                  if (txt.length >= 8) {
-                    Future.delayed(Duration.zero).then((_) {
-                      setState(() {
-                        btn_enable = true;
-                        global.pincode=txt;
-                      });
-                    });
-                  } else {
-                    Future.delayed(Duration.zero).then((_) {
-                      setState(() {
-                        btn_enable = false;
-                      });
-                    });
-                  }
-                },
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                hintText: pinCode==null?pinCode:"",
-                labelText: pinCode==null?' Enter Pincode':pinCode),
-              // validator: validateCity,
-              onSaved: (String value) {
-                pinCode = value;
-              }),
-           ),
-              InkWell(
-              child: _isLoading?CircularProgressIndicator():
-              SizedBox(
-          width: MediaQuery.of(context).size.width/3,
-              child:Row(
+      print(placemark[0].postalCode);
+      setState(() {
+        pinCode = placemark[0].postalCode;
+        btn_enable = true;
+        _isLoading = false;
+      });
+      // print(placemark[0].name+placemark[0].administrativeArea+placemark[0].name+placemark[0].administrativeArea);
+    }
+
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: WillPopScope(
+            onWillPop: () {
+              print("going back from name");
+              // callSnackBar("Exit");
+              // Navigator.pushNamed(context, "/landingpage");
+              Details();
+            },
+            child: ListView(children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-              Text(" Or Autolocate "),
-              Icon(
-                 Icons.my_location,
-                 color: Colors.red,
-                 size: 40,
-                //  my_location
-               ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    Text(
+                      'My \nPincode is',
+                      style: TextStyle(
+                          fontSize: 75.0,
+                          color: Colors.redAccent[700],
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      child: Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.70,
+                            child: TextFormField(
+                                // autovalidate: true,
+                                validator: (String txt) {
+                                  if (txt.length >= 8) {
+                                    Future.delayed(Duration.zero).then((_) {
+                                      setState(() {
+                                        btn_enable = true;
+                                        global.pincode = txt;
+                                      });
+                                    });
+                                  } else {
+                                    Future.delayed(Duration.zero).then((_) {
+                                      setState(() {
+                                        btn_enable = false;
+                                      });
+                                    });
+                                  }
+                                },
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                    hintText: pinCode == null ? pinCode : "",
+                                    labelText: pinCode == null
+                                        ? ' Enter Pincode or Autolocate'
+                                        : pinCode),
+                                // validator: validateCity,
+                                onSaved: (String value) {
+                                  pinCode = value;
+                                }),
+                          ),
+                          InkWell(
+                            child: _isLoading
+                                ? CircularProgressIndicator()
+                                : SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    child: Row(
+                                      children: <Widget>[
+                                        // Text(" Or Autolocate "),
+                                        Icon(
+                                          Icons.my_location,
+                                          color: Colors.red,
+                                          size: 40,
+                                          //  my_location
+                                        ),
+                                      ],
+                                    )),
+                            onTap: () async {
+                              setState(() {
+                                _isLoading = true;
+                              });
+                              _getLocation().then((value) {
+                                setState(() {
+                                  // isLoading=true;
+                                  // btn_enable = true;
+                                  userLocation = value;
+                                });
+                                // await
+                                callMe(userLocation);
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      child: RaisedButton(
+                          color: Colors.redAccent[700],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0)),
+                          child: Text(
+                            'Continue',
+                            style: TextStyle(
+                                fontSize: 40.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          // padding: EdgeInsets.fromLTRB(180.0, 15.0, 190.0, 15.0),
+                          onPressed: btn_enable == true
+                              ? () {
+                                  print("clik");
+                                  Navigator.pushNamed(context, "/group");
+                                }
+                              : null),
+                    ),
                   ],
-              )
-              ),
-               onTap: ()async{
-                 setState(() {
-                      _isLoading=true;
-                      });
-                 _getLocation().then((value) {
-                    setState(() {
-                      // isLoading=true;
-                      // btn_enable = true;
-                      userLocation = value;
-                    });
-                    // await 
-                    callMe(userLocation);
-                     
-                  });
-               },
-              )
-             ],
-           ),
-            
-        ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.95,
-            height: MediaQuery.of(context).size.height * 0.07,
-            child: RaisedButton(
-                color: Colors.redAccent[700],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0)),
-                child: Text(
-                  'Continue',
-                  style: TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
                 ),
-                // padding: EdgeInsets.fromLTRB(180.0, 15.0, 190.0, 15.0),
-                onPressed: btn_enable == true ? () {
-                  print("clik");
-                  Navigator.pushNamed(context, "/group");
-                  
-                  
-                } : null),
-          ),
-        ],
-      ),
-          )
-        ]
-      )
-    ));
+              )
+            ])));
   }
 }
 
-
-
-class GroupScreen extends StatefulWidget{
+class GroupScreen extends StatefulWidget {
   @override
   _GroupScreenState createState() => _GroupScreenState();
 }
@@ -718,38 +691,40 @@ class _GroupScreenState extends State<GroupScreen> {
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height/3,
+                  height: MediaQuery.of(context).size.height / 3,
                   width: MediaQuery.of(context).size.width,
                   child: FlatButton(
-                  splashColor: Colors.white,
-                  onPressed: () {
-                    global.group="A";
-                    OurDatabase().createUser();
-                    // Navigator.pushNamed(context, "/orderConfirm");
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OrderConfirmation()));
-                  },
-                  
-                  child:SvgPicture.asset('assets/images/GroupB.svg'),
-                  
-                ),
+                    splashColor: Colors.white,
+                    onPressed: () {
+                      global.group = "A";
+                      OurDatabase().createUser();
+                      // Navigator.pushNamed(context, "/orderConfirm");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OrderConfirmation()));
+                    },
+                    child: SvgPicture.asset('assets/images/GroupB.svg'),
+                  ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height/3,
+                  height: MediaQuery.of(context).size.height / 3,
                   width: MediaQuery.of(context).size.width,
                   child: FlatButton(
-                  splashColor: Colors.white,
-                  onPressed: () {
-                    global.group="B";
-                    OurDatabase().createUser();
-                    
-                    // Navigator.pushNamed(context, "/orderConfirm");
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OrderConfirmation()));
-                  },
-                  
-                  child:SvgPicture.asset('assets/images/GroupA.svg'),
-                  
-                ),
+                    splashColor: Colors.white,
+                    onPressed: () {
+                      global.group = "B";
+                      OurDatabase().createUser();
+
+                      // Navigator.pushNamed(context, "/orderConfirm");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OrderConfirmation()));
+                    },
+                    child: SvgPicture.asset('assets/images/GroupA.svg'),
+                  ),
                 ),
               ],
             ),
@@ -759,14 +734,6 @@ class _GroupScreenState extends State<GroupScreen> {
     );
   }
 }
-
-
-
-
-
-
-
-
 
 // import 'package:flutter/material.dart';
 // import 'package:nutshell/orderConfirmation.dart';
@@ -839,7 +806,7 @@ class _GroupScreenState extends State<GroupScreen> {
 
 // var _dropforms= [
 //    'Select Group','Group-A','Group-B'
-//   ]; 
+//   ];
 //   var _dropformSelected="Select Group";
 
 //   String pinCode;
@@ -854,13 +821,12 @@ class _GroupScreenState extends State<GroupScreen> {
 //     try {
 //         currentLocation= await geolocator.getCurrentPosition(
 //           // desiredAccuracy: LocationAccuracy.best
-        
+
 //         );
 //       // currentLocation = await geolocator.getCurrentPosition(
 //       //     // desiredAccuracy: LocationAccuracy.best
 //       //     );
 
-          
 //        } catch (e) {
 //       currentLocation = null;
 //     }
@@ -868,7 +834,6 @@ class _GroupScreenState extends State<GroupScreen> {
 //   }
 
 //   Widget FormUI() {
-    
 
 //   Position userLocation;
 
@@ -878,33 +843,29 @@ class _GroupScreenState extends State<GroupScreen> {
 //     super.initState();
 //     _getLocation().then((position) {
 //       userLocation = position;
-      
+
 //     });
 //   }
-
-
-  
 
 //   void callMe(Position userLocation)async{
 //     print("called for pLacemark");
 //     List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(userLocation.latitude,userLocation.longitude);
-    
+
 //     print(placemark[0].postalCode);
 //     setState(() {
-      
+
 //     pinCode= placemark[0].postalCode;
 //     _currentUser.pinCode=placemark[0].postalCode;
 //     isLoading=false;
 //     });
 //     // print(placemark[0].name+placemark[0].administrativeArea+placemark[0].name+placemark[0].administrativeArea);
 //   }
-  
-     
+
 //     _currentUser.sID = sID;
 //      bool selected = false;
 //     return ListView(
 //        children: <Widget>[
-         
+
 //      Column(
 //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //       crossAxisAlignment: CrossAxisAlignment.center,
@@ -930,7 +891,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //               width: 140,
 //               child: TextFormField(
 //                   controller: _fnamecontroller,
-                  
+
 //                   keyboardType: TextInputType.text,
 //                   decoration: InputDecoration(labelText: 'Enter First Name'),
 //                   validator: validateName,
@@ -942,7 +903,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //               width: 140,
 //               child: TextFormField(
 //                   controller: _lnamecontroller,
-                  
+
 //                   keyboardType: TextInputType.text,
 //                   decoration: InputDecoration(labelText: 'Enter Last Name'),
 //                   validator: validateName,
@@ -957,7 +918,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //           width: 320,
 //           child: TextFormField(
 //               controller: _schoolcontroller,
-              
+
 //               keyboardType: TextInputType.text,
 //               decoration: InputDecoration(labelText: 'Enter School Name'),
 //               validator: validateSchool,
@@ -1004,7 +965,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //           width: 320,
 //           child: TextFormField(
 //               controller: _classcontroller,
-              
+
 //               keyboardType: TextInputType.number,
 //               decoration: InputDecoration(labelText: 'Enter Class'),
 //               validator: validateClass,
@@ -1017,7 +978,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //           width: 320,
 //           child: TextFormField(
 //               controller: _emailcontroller,
-              
+
 //               keyboardType: TextInputType.emailAddress,
 //               decoration: InputDecoration(labelText: 'Enter Email Address'),
 //               validator: validateEmail,
@@ -1031,7 +992,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //           width: 320,
 //           child: TextFormField(
 //               controller: _citycontroller,
-              
+
 //               keyboardType: TextInputType.text,
 //               decoration: InputDecoration(labelText: 'Enter City'),
 //               validator: validateCity,
@@ -1040,7 +1001,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //               }),
 //         ),
 //         Padding(padding: EdgeInsets.all(10)),
-        
+
 //         SizedBox(
 //            width: 320,
 //            child:Row(
@@ -1049,7 +1010,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //           width: MediaQuery.of(context).size.width/3,
 //           child: TextFormField(
 //               controller: _pinCodecontroller,
-              
+
 //               keyboardType: TextInputType.text,
 //               decoration: InputDecoration(
 //                 hintText: _currentUser.pinCode==null?pinCode:"",
@@ -1059,7 +1020,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //                 _currentUser.pinCode = value;
 //               }),
 //         ),
-              
+
 //               InkWell(
 //               child: isLoading?CircularProgressIndicator():
 //               SizedBox(
@@ -1085,24 +1046,22 @@ class _GroupScreenState extends State<GroupScreen> {
 //                       // isLoading=true;
 //                       userLocation = value;
 //                     });
-//                     // await 
+//                     // await
 //                     callMe(userLocation);
 //                   });
 //                },
 //               )
 //              ],
 //            ),
-            
+
 //         ),
-
-
 
 //         Padding(padding: EdgeInsets.all(10)),
 //         SizedBox(
 //           width: 320,
 //           child: TextFormField(
 //               controller: _phonecontroller,
-              
+
 //               keyboardType: TextInputType.number,
 //               decoration: InputDecoration(
 //                   labelText: 'Enter Phone Number', prefix: Text("+91")),
@@ -1113,14 +1072,14 @@ class _GroupScreenState extends State<GroupScreen> {
 //               }),
 //         ),
 //         Padding(padding: EdgeInsets.all(10)),
-//         SizedBox( 
+//         SizedBox(
 //           width: 320,
 //           child: Text("Select Group\n1.Group A Suitable for students of ages 9-12\n2.Suitable for students of ages 13-1"),
 //       //         Text("Suitable for students of ages 9-12")"),
 //           // height: MediaQuery.of(context).size.height / 6,
 //         ),
 //         Padding(padding: EdgeInsets.all(10)),
-//         SizedBox( 
+//         SizedBox(
 //           width: 320,
 //                         child:DropdownButton<String>(
 //                     items: _dropforms.map((String dropDownStringItem)
@@ -1131,7 +1090,7 @@ class _GroupScreenState extends State<GroupScreen> {
 
 //                        );
 //                     }).toList(),
-                    
+
 //                     onChanged: (String newValueSelected){
 //                       setState(() {
 //                          _currentUser.group = newValueSelected;
@@ -1142,8 +1101,6 @@ class _GroupScreenState extends State<GroupScreen> {
 //                     ),
 //               ),
 //         Padding(padding: EdgeInsets.all(20)),
-        
-
 
 //       ],
 //     ),
@@ -1173,7 +1130,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //       //     ),
 //       //   ),
 //       // ),
-      
+
 //       // GestureDetector(
 //       //   onTap: () {
 //       //     _currentUser.group = 'GroupB';
@@ -1223,7 +1180,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //       )
 //        ]
 //     );
-    
+
 //   }
 
 //   sendToServer() async {
@@ -1233,7 +1190,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //       setState(() {
 //          submitLoading=true;
 //       });
-     
+
 //       // No any error in validation
 //       _formKey.currentState.save();
 //       print("CLicked successfully");
@@ -1243,7 +1200,7 @@ class _GroupScreenState extends State<GroupScreen> {
 //       setState(() {
 //          submitLoading=false;
 //       });
-     
+
 //       // Navigator.push(
 //       //   context, MaterialPageRoute(builder: (context) => HomeScreen()));
 //       // Navigator.pushNamed(context, "/dummy");
@@ -1320,5 +1277,3 @@ class _GroupScreenState extends State<GroupScreen> {
 //   else
 //     return null;
 // }
-
-

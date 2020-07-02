@@ -23,6 +23,8 @@ int payfree = 0;
 int payone = 0;
 int paytwo = 0;
 int paythree = 0;
+enum Status { none, running, stopped, paused }
+enum en { f, b, s, p }
 final CollectionReference users = Firestore.instance.collection('users');
 Users _currentUser = Users();
 Users get getCurrentUser => _currentUser;
@@ -47,24 +49,24 @@ class _SubscriptionState extends State<Subscription> {
   ];
   @override
   Widget build(BuildContext context) {
+    callSet(String sv) {
+      if (isVisible == true && svgIndex != svgNames.indexOf(sv)) {
+        setState(() {
+          isVisible = true;
+          svgIndex = svgNames.indexOf(sv);
+        });
+      } else {
+        setState(() {
+          isVisible = !isVisible;
+
+          svgIndex = svgNames.indexOf(sv);
+        });
+      }
+    }
+
     return Scaffold(
         backgroundColor: Colors.white,
-        // appBar: AppBar(
-        //   centerTitle: true,
-        //   title: Text("Pick your subscription plan",
-        //       style: Theme.of(context).textTheme.headline6),
-        //   backgroundColor: Colors.white,
-        //   elevation: 0.0,
-        //   // iconTheme: IconThemeData(
-        //   //   color: Colors.black,
-        //   //   size: 80.0,
-        //   // ),
-        // ),
-        body:
-            // Container(
-            // margin: EdgeInsets.only(top: 10, left: 7, right: 7),
-            // child:
-            ListView(
+        body: ListView(
           children: <Widget>[
             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             Text(
@@ -79,18 +81,13 @@ class _SubscriptionState extends State<Subscription> {
                   options: CarouselOptions(
                     aspectRatio: 8 / 25,
                     autoPlay: false,
-                    // height: 2000,
-                    // width: MediaQuery.of(context).size.height * 0.90,
                   ),
                   items: svgNames.map((sv) {
                     return Builder(
                       builder: (BuildContext context) {
                         return GestureDetector(
                             onTap: () {
-                              setState(() {
-                                isVisible = !isVisible;
-                                svgIndex = svgNames.indexOf(sv);
-                              });
+                              callSet(sv);
                             },
                             child: Stack(
                               children: <Widget>[
@@ -100,11 +97,21 @@ class _SubscriptionState extends State<Subscription> {
                                   ),
                                 ),
                                 Visibility(
-                                    visible: svgNames.indexOf(sv) == svgIndex
-                                        ? true
+                                    visible: isVisible
+                                        ? svgNames.indexOf(sv) == svgIndex
+                                            ? true
+                                            : false
                                         : false,
-                                    child: Align(
-                                      child: Icon(Icons.add),
+                                    child: Positioned(
+                                      left: MediaQuery.of(context).size.width *
+                                          0.52,
+                                      top: MediaQuery.of(context).size.height *
+                                          0.30,
+                                      child: Icon(
+                                        Icons.check_circle,
+                                        color: Colors.white,
+                                        size: 45,
+                                      ),
                                     ))
                               ],
                             ));
@@ -113,28 +120,34 @@ class _SubscriptionState extends State<Subscription> {
                   }).toList()),
             ),
             Container(
-              padding: EdgeInsets.only(left: 300.0, right: 10.0),
-              // child: Visibility(
-              // visible: isVisible,
+              padding: EdgeInsets.only(left: 150.0, right: 10.0),
+
               child: RaisedButton(
                 padding: EdgeInsets.only(
                     left: 50.0, right: 50.0, top: 10.0, bottom: 10.0),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0)),
-                onPressed: isVisible == true ? () {} : null,
+                onPressed: isVisible == true
+                    ? () {
+                        global.subPlan = en.values[svgIndex].toString();
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => OrderConfirmation()))
+                        Navigator.of(context).pushNamed('/details');
+                      }
+                    : null,
                 disabledColor: Colors.grey,
                 color: Colors.redAccent[700],
                 child: Text(
                   'Continue',
-                  style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                 ),
               ),
               // ),
             )
           ],
-        )
-        // )
-        );
+        ));
   }
 
   @override
